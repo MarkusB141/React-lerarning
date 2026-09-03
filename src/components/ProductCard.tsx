@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
 
 type ProductCardProps = {
@@ -13,6 +14,7 @@ export function ProductCard({ product, onDelete, onEdit }: ProductCardProps) {
             <h2>{product.name}</h2>
             <p>Status: {product.status}</p>
             <p>ID: {product.id}</p>
+            <Link to={`/products/${product.id}`}>Details</Link>
             <button onClick={() => onDelete(product.id)}>Löschen</button>
             <button onClick={() => onEdit(product)}>Bearbeiten</button>
         </div>

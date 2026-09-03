@@ -1,56 +1,28 @@
 import { useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { ProductForm } from "../components/ProductForm";
-
 import type { Product } from "../types/product";
 
-export function ProductsPage() {
+type ProductsPageProps = {
+  products: Product[];
+  onDelete: (id: number) => void;
+  onAdd: (product: Product) => void;
+  onUpdate: (product: Product) => void;
+}
+
+export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPageProps) {
     const [showProductForm, setShowProductForm] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-    const [products, setProducts] = useState<Product[]>([
-        {
-          id: 1,
-          name: 'Pflegebett',
-          status: 'Verfügbar'
-        },
-        {
-          id: 2,
-          name: 'Nachtkästchen',
-          status: 'Verliehen'
-        },
-        {
-          id: 3,
-          name: 'Elektrisches Pflegebett',
-          status: 'Beschädigt'
-        },
-        {
-          id: 4,
-          name: 'Standard Pflegebett',
-          status: 'Verfügbar'
-        }
-      ]);
-
-    function handleDeleteProduct(id: number){
-        setProducts(previousProducts => 
-            previousProducts.filter(product => product.id !== id)
-        );
+    
+    function handleAdd(product: Product){
+      onAdd(product);
+      setEditingProduct(null);
+      setShowProductForm(false);
     }
-    function handleAddProduct(product: Product) {
-        setProducts(previousProducts => [...previousProducts, product]);
-        setEditingProduct(null);
-        setShowProductForm(false);
-    }
-    function handleUpdateProduct(updatedProduct: Product){
-        setProducts(previousProducts => 
-        previousProducts.map(product => {
-            if(product.id === updatedProduct.id){
-            return updatedProduct;
-            }
-            return product;
-        })
-        )
-        setEditingProduct(null);
-        setShowProductForm(false);
+    function handleUpdate(product: Product){
+      onUpdate(product);
+      setEditingProduct(null);
+      setShowProductForm(false);
     }
     function handleEditProduct(product: Product) {
         setShowProductForm(true);
@@ -77,7 +49,7 @@ export function ProductsPage() {
       >
         {showProductForm ? 'Abbrechen' : 'Neues Produkt'}
       </button>
-      {showProductForm && <ProductForm onAdd={handleAddProduct} onUpdate={handleUpdateProduct} editingProduct={editingProduct}/>}
+      {showProductForm && <ProductForm onAdd={handleAdd} onUpdate={handleUpdate} editingProduct={editingProduct}/>}
       <hr />
       {editingProduct && (
         <p>
@@ -89,7 +61,7 @@ export function ProductsPage() {
         <ProductCard 
           key={product.id}
           product={product}
-          onDelete={handleDeleteProduct}
+          onDelete={onDelete}
           onEdit={handleEditProduct}
         />
       ))}
