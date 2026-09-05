@@ -23,9 +23,9 @@ export function ProductDetailPage({ products }: ProductDetailPageProps) {
 
     return (
         <div>
-        <h1>{product.name}</h1>
-        <p>Status: {product.status}</p>
-        <p>Produkt-ID: {product.id}</p>
+            <h1>{product.name}</h1>
+            <p>Status: {product.status}</p>
+            <p>Produkt-ID: {product.id}</p>
         </div>
     );
 }
