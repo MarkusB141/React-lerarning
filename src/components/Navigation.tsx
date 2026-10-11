@@ -6,16 +6,32 @@ type NavigationProps = {
 }
 
 export function Navigation({ title, showTitle }: NavigationProps){
+    const navigationItems = [
+        {path: '/', label: 'Home'},
+        {path: '/products', label: 'Produkte'},
+        {path: '/customers', label: 'Kunden'},
+        {path: '/rentals', label: 'Verleihübersicht'},
+        {path: '/api-test', label: 'API-Test'}
+    ];
     return (
-        <div>
+        <nav>
             {showTitle && <h2>{title}</h2>}
-            <ul>
-                <li><NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
-                <li><NavLink to="/products" className={({ isActive }) => isActive ? 'active' : ''}>Produkte</NavLink></li>
-                <li><NavLink to="/customers" className={({ isActive }) => isActive ? 'active' : ''}>Kunden</NavLink></li>
-                <li><NavLink to="/rentals" className={({ isActive }) => isActive ? 'active' : ''}>Verleihübersicht</NavLink></li>
-                <li><NavLink to="/api-test" className={({ isActive }) => isActive ? 'active' : ''}>API-Test</NavLink></li>
+            <ul className="flex flex-col md:flex-row gap-4 p-4 bg-slate-800 text-white rounded-lg">
+                {navigationItems.map(item => (
+                    <li key={item.path}>
+                        <NavLink
+                            to={item.path}
+                            className={({ isActive }) => getNavLinkClass(isActive)}
+                        >
+                            {item.label}
+                        </NavLink>
+                    </li>
+                ))}
             </ul>
-        </div>
+        </nav>
     )
+}
+
+function getNavLinkClass(isActive: boolean): string{
+    return `hover:text-blue-300 ${isActive ? 'font-bold underline text-blue-300' : ''}`;
 }

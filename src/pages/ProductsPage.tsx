@@ -57,14 +57,17 @@ export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPa
         </p>
       )}
       {/* Ausgabe aller Produkte */}
-      {products.map(product => (
-        <ProductCard 
-          key={product.id}
-          product={product}
-          onDelete={onDelete}
-          onEdit={handleEditProduct}
-        />
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {products.map(product => (
+          <ProductCard 
+            key={product.id}
+            product={product}
+            onDelete={onDelete}
+            onEdit={handleEditProduct}
+          />
+        ))}
+      </div>
+    
     </div>
   );
 }
