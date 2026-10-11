@@ -14,6 +14,7 @@ export function Navigation({ title, showTitle }: NavigationProps){
                 <li><NavLink to="/products" className={({ isActive }) => isActive ? 'active' : ''}>Produkte</NavLink></li>
                 <li><NavLink to="/customers" className={({ isActive }) => isActive ? 'active' : ''}>Kunden</NavLink></li>
                 <li><NavLink to="/rentals" className={({ isActive }) => isActive ? 'active' : ''}>Verleihübersicht</NavLink></li>
+                <li><NavLink to="/api-test" className={({ isActive }) => isActive ? 'active' : ''}>API-Test</NavLink></li>
             </ul>
         </div>
     )

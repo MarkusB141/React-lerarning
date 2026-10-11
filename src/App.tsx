@@ -74,10 +74,11 @@ export default function App() {
 
   return (
   <div>
-    <ApiTestPage />
+    
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path='api-test' element={<ApiTestPage />} ></Route>
         <Route path='products'>
           <Route 
             index
