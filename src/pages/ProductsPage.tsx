@@ -39,16 +39,18 @@ export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPa
     }
 
   return (
-    <div>
-      <h1>Produkte</h1>
-      <p>{products.length > 0 ? `${products.length} Produkte vorhanden` : 'Keine Produkte vorhanden'}</p>
-
-      {/* Neues Objekt hinzufügen */}
-      <button
-        onClick={handleProductFormToggle}
-      >
-        {showProductForm ? 'Abbrechen' : 'Neues Produkt'}
-      </button>
+    <div className="max-w-6xl mx-auto p-6 space-y-6">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between border border-slate-200 rounded-lg p-4 shadow-md">
+        <h1 className="text-3xl font-bold">Produkte</h1>
+          <button
+          className={`${buttonBaseClass} ${showProductForm ? 'bg-gray-600 hover:bg-gray-700' : 'bg-blue-600 hover:bg-blue-700'}`}
+          onClick={handleProductFormToggle}
+        >
+          {showProductForm ? 'Abbrechen' : 'Neues Produkt'}
+        </button>
+      </div>
+       <p className="text-sm text-gray-500">{products.length > 0 ? `${products.length} Produkte vorhanden` : 'Keine Produkte vorhanden'}</p>
+      
       {showProductForm && <ProductForm onAdd={handleAdd} onUpdate={handleUpdate} editingProduct={editingProduct}/>}
       <hr />
       {editingProduct && (
@@ -59,7 +61,7 @@ export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPa
       {/* Ausgabe aller Produkte */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map(product => (
-          <ProductCard 
+          <ProductCard
             key={product.id}
             product={product}
             onDelete={onDelete}
@@ -71,3 +73,5 @@ export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPa
     </div>
   );
 }
+
+const buttonBaseClass = "text-white px-3 py-2 rounded-md";
