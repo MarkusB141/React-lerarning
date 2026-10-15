@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { ProductForm } from "../components/ProductForm";
+import { ProductTable } from "../components/ProductTable";
 import type { Product } from "../types/product";
 
 type ProductsPageProps = {
@@ -69,6 +70,8 @@ export function ProductsPage({ products, onDelete, onAdd, onUpdate }: ProductsPa
           />
         ))}
       </div>
+
+      <ProductTable products={products}/>
     
     </div>
   );
